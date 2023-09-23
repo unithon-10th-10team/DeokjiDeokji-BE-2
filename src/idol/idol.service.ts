@@ -38,7 +38,7 @@ export class IdolService {
   }
 
   async getGroupVisitedPlace(groupName: string) {
-    const group = await this.prisma.artist.findFirst({
+    const group = await this.prisma.group.findFirst({
       where: {
         name: groupName,
       },
