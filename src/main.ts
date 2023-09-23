@@ -4,7 +4,7 @@ import { VersioningType, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule);
 
   app.enableVersioning({
     type: VersioningType.URI,
@@ -22,7 +22,7 @@ async function bootstrap() {
   // app.enableCors();
   app.enableCors({
     // domain 확정되었을 때 origin 수정 필요
-    origin: 'localhost:3000',
+    origin: 'http://localhost:3000',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   });
