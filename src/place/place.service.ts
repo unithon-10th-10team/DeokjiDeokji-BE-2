@@ -37,4 +37,8 @@ export class PlaceService {
       }
     });
   }
+
+  async getPlace() {
+    return await this.prisma.restaurant.findMany();
+  }
 }

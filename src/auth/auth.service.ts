@@ -7,8 +7,6 @@ import { PrismaService } from 'src/config/database/prisma.service';
 import { KakaoLoginDto } from './dtos/kakao-login.dto';
 import { JwtService } from '@nestjs/jwt';
 import axios from 'axios';
-import { stringify } from 'querystring';
-
 @Injectable()
 export class AuthService {
   constructor(
