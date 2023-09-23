@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/config/database/prisma.service';
 
 @Injectable()
@@ -11,6 +11,9 @@ export class IdolService {
         name: idolName,
       },
     });
+    if (!idol) {
+      throw new BadRequestException('해당 아이돌이 존재하지않습니다');
+    }
     const places = await this.prisma.restaurant_artist_mapping.findMany({
       where: {
         artistId: idol.id,
@@ -40,6 +43,9 @@ export class IdolService {
         name: groupName,
       },
     });
+    if (!group) {
+      throw new BadRequestException('해당 그룹이 존재하지않습니다');
+    }
     const places = await this.prisma.restaurant_artist_mapping.findMany({
       where: {
         artistId: group.id,
