@@ -26,11 +26,11 @@ export class IdolService {
           id: place.restaurantId,
         },
       });
-      for (let i = 0; i < placeInfo.length; i++) {
-        if (placeInfo[i].id === place.id) {
-          break;
-        }
-      }
+      //   for (let i = 0; i < placeInfo.length; i++) {
+      //     if (placeInfo[i].id === place.id) {
+      //       break;
+      //     }
+      //   }
       placeInfo.push(info);
     });
 
@@ -59,11 +59,11 @@ export class IdolService {
         },
       });
 
-      for (let i = 0; i < placeInfo.length; i++) {
-        if (placeInfo[i].id === place.id) {
-          break;
-        }
-      }
+      //   for (let i = 0; i < placeInfo.length; i++) {
+      //     if (placeInfo[i].id === place.id) {
+      //       break;
+      //     }
+      //   }
       placeInfo.push(info);
     });
 
