@@ -1,4 +1,4 @@
-import { Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CurrentUser } from 'src/common/decorators/current-user.decorator';
 import { User } from '@prisma/client';
@@ -24,7 +24,7 @@ export class UserController {
   @Post('storage')
   async postStorage(
     @CurrentUser() user: User,
-    createStorageDto: CreateStorageDto,
+    @Body() createStorageDto: CreateStorageDto,
   ) {
     return await this.userService.createStorage(user, createStorageDto);
   }
@@ -37,7 +37,7 @@ export class UserController {
   @Post('booking-storage')
   async createBookingStorage(
     @CurrentUser() user: User,
-    createBookingDto: CreateBookingDto,
+    @Body() createBookingDto: CreateBookingDto,
   ) {
     return await this.userService.createBooking(user, createBookingDto);
   }
