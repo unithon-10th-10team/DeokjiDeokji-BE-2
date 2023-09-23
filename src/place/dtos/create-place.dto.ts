@@ -8,28 +8,6 @@ import {
   IsString,
 } from 'class-validator';
 
-export class CreatePlaceDto {
-  @IsNotEmpty()
-  @IsNumber()
-  purpose: number;
-
-  @IsNotEmpty()
-  @IsString()
-  group: string;
-
-  @IsNotEmpty()
-  @IsString()
-  member: string;
-
-  @IsOptional()
-  @IsNumber()
-  temperature: number;
-
-  @IsNotEmpty()
-  @Type(() => placeDto)
-  place: placeDto;
-}
-
 class placeDto {
   @IsNotEmpty()
   @IsString()
@@ -50,4 +28,25 @@ class placeDto {
   @IsNotEmpty()
   @IsNumber()
   latitude: number;
+}
+export class CreatePlaceDto {
+  @IsNotEmpty()
+  @IsNumber()
+  purpose: number;
+
+  @IsNotEmpty()
+  @IsString()
+  group: string;
+
+  @IsNotEmpty()
+  @IsString()
+  member: string;
+
+  @IsOptional()
+  @IsNumber()
+  temperature: number;
+
+  @IsNotEmpty()
+  @Type(() => placeDto)
+  place: placeDto;
 }

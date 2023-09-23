@@ -1,3 +1,3 @@
 export type Payload = {
-  userId: string;
+  userId: any;
 };

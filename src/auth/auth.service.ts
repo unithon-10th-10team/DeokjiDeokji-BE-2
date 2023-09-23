@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from 'src/config/database/prisma.service';
 import { KakaoLoginDto } from './dtos/kakao-login.dto';
-import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import axios from 'axios';
 import { stringify } from 'querystring';
@@ -14,7 +13,6 @@ import { stringify } from 'querystring';
 export class AuthService {
   constructor(
     private readonly prisma: PrismaService,
-    private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -41,7 +39,6 @@ export class AuthService {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
     if (!user) throw new BadRequestException(); //카카오 로그인 실패 예외처리
-    console.log(user.data);
     let userId = await this.prisma.user.findFirst({
       where: {
         id: stringify(user.data.id),
@@ -51,7 +48,7 @@ export class AuthService {
       try {
         userId = await this.prisma.user.create({
           data: {
-            id: stringify(user.data.id),
+            id: user.data.id.toString(),
             name: user.data.properties.nickname,
             email: user.kakao_account?.email ?? 'null',
             birthday: user.kakao_account?.birthday ?? 'null', //확인필요
@@ -62,6 +59,6 @@ export class AuthService {
         throw new InternalServerErrorException(e);
       }
 
-    return userId.id; // 회원이 이미 있다면 있는 유저의 아이디 반환
+    return userId; // 회원이 이미 있다면 있는 유저의 아이디 반환
   }
 }

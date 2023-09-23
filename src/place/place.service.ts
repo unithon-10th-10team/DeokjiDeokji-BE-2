@@ -8,6 +8,7 @@ export class PlaceService {
   constructor(private readonly prisma: PrismaService) {}
 
   async createPlace(user: User, createPlaceDto: CreatePlaceDto) {
+    console.log(user);
     return await this.prisma.$transaction(async (tx) => {
       const newRestaurant = await tx.restaurant.create({
         data: {
