@@ -5,6 +5,7 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { User } from '@prisma/client';
@@ -13,6 +14,7 @@ import { CurrentUser } from 'src/common/decorators/current-user.decorator';
 import { CreatePlaceDto } from './dtos/create-place.dto';
 import { PlaceService } from './place.service';
 import { CommonResponseDto } from 'src/common/dtos/common-response.dto';
+import { PageDto } from 'src/common/dtos/content-wrapper';
 
 @UseGuards(JwtGuard)
 @Controller('place')
@@ -29,9 +31,9 @@ export class PlaceController {
   }
 
   @Get()
-  async getPlace() {
-    const places = await this.placeService.getPlace();
-    return new CommonResponseDto(places);
+  async getPlace(@Query('name') name: string) {
+    const places = await this.placeService.getPlace(name);
+    return new PageDto(places);
   }
 
   @Get(':placeId')

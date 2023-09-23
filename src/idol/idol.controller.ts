@@ -1,10 +1,4 @@
-import {
-  Controller,
-  Get,
-  Param,
-  ParseIntPipe,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { IdolService } from './idol.service';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
 
@@ -13,8 +7,13 @@ import { JwtGuard } from 'src/auth/guards/jwt.guard';
 export class IdolController {
   constructor(private readonly idolService: IdolService) {}
 
-  @Get(':idolId')
-  async getVistedPlace(@Param('idolId', ParseIntPipe) idolId: number) {
-    return await this.idolService.getVisitedPlace(idolId);
+  @Get(':idolName')
+  async getVistedPlace(@Param('idolName') idolName: string) {
+    return await this.idolService.getVisitedPlace(idolName);
+  }
+
+  @Get('group/:groupName')
+  async getGroupVisitedPlace(@Param('groupName') groupName: string) {
+    return await this.idolService.getGroupVisitedPlace(groupName);
   }
 }

@@ -38,8 +38,12 @@ export class PlaceService {
     });
   }
 
-  async getPlace() {
-    return await this.prisma.restaurant.findMany();
+  async getPlace(name: string) {
+    return await this.prisma.restaurant.findMany({
+      where: {
+        ...(name && { name: { contains: name } }),
+      },
+    });
   }
 
   async getVisitedIdols(placeId: number) {
