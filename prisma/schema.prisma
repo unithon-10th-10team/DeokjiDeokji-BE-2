@@ -6,6 +6,97 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id             Int              @id
+  email          String           @db.VarChar(255)
+  name           String           @db.VarChar(255)
+  birthday       String           @db.VarChar(255)
+  storage        Storage[]
+  bookingstorage BookingStorage[]
+
+  @@map("user")
+}
+
+model Storage {
+  id           Int         @id @default(autoincrement())
+  User         User?       @relation(fields: [userId], references: [id])
+  userId       Int?
+  Restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
+  restaurantId Int?
+
+  @@map("storage")
+}
+
+model BookingStorage {
+  id           Int         @id @default(autoincrement())
+  User         User?       @relation(fields: [userId], references: [id])
+  userId       Int?
+  Restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
+  restaurantId Int?
+
+  @@map("bookingstorage")
+}
+
+model Restaurant {
+  id             Int              @id @default(autoincrement())
+  storage        Storage[]
+  bookingstorage BookingStorage[]
+  type           RestaurantType
+  longiitude     Decimal
+  latitude       Decimal
+  location       String           @db.VarChar(255)
+
+  restaurantArtistMapping  restaurant_artist_mapping[]
+  restaurantHashTagMapping restaurant_hashtag_mapping[]
+
+  @@map("restaurant")
+}
+
+enum RestaurantType {
+  Cafe
+  Restaurant
+}
+
+model Group {
+  id     Int      @id @default(autoincrement())
+  name   String   @db.VarChar(255)
+  artist Artist[]
+
+  @@map("group")
+}
+
+model Artist {
+  id                      Int                         @id @default(autoincrement())
+  Group                   Group?                      @relation(fields: [groupId], references: [id])
+  groupId                 Int?
+  restaurantArtistMapping restaurant_artist_mapping[]
+
+  @@map("artist")
+}
+
+model HashTag {
+  id                       Int                          @id @default(autoincrement())
+  name                     String                       @db.VarChar(255)
+  restaurantHashTagMapping restaurant_hashtag_mapping[]
+}
+
+model restaurant_artist_mapping {
+  id           Int         @id @default(autoincrement())
+  Artist       Artist?     @relation(fields: [artistId], references: [id])
+  artistId     Int?
+  Restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
+  restaurantId Int?
+}
+
+model restaurant_hashtag_mapping {
+  id Int @id @default(autoincrement())
+
+  HashTag      HashTag?    @relation(fields: [hashTagId], references: [id])
+  hashTagId    Int?
+  Restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
+  restaurantId Int?
 }
