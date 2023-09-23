@@ -1,4 +1,5 @@
 import { RestaurantType } from '@prisma/client';
+import { Type } from 'class-transformer';
 import {
   IsEnum,
   IsNotEmpty,
@@ -14,15 +15,33 @@ export class CreatePlaceDto {
 
   @IsNotEmpty()
   @IsString()
-  name: string;
-
-  @IsNotEmpty()
-  @IsString()
   group: string;
 
   @IsNotEmpty()
   @IsString()
   member: string;
+
+  @IsOptional()
+  @IsNumber()
+  temperature: number;
+
+  @IsNotEmpty()
+  @Type(() => placeDto)
+  place: placeDto;
+}
+
+class placeDto {
+  @IsNotEmpty()
+  @IsString()
+  name: string;
+
+  @IsOptional()
+  @IsString()
+  location: string;
+
+  @IsNotEmpty()
+  @IsEnum(RestaurantType)
+  type: RestaurantType;
 
   @IsNotEmpty()
   @IsNumber()
@@ -31,16 +50,4 @@ export class CreatePlaceDto {
   @IsNotEmpty()
   @IsNumber()
   latitude: number;
-
-  @IsOptional()
-  @IsNumber()
-  temperature: number;
-
-  @IsNotEmpty()
-  @IsEnum(RestaurantType)
-  type: RestaurantType;
-
-  @IsOptional()
-  @IsString()
-  location: string;
 }

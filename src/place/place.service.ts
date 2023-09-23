@@ -11,11 +11,11 @@ export class PlaceService {
     return await this.prisma.$transaction(async (tx) => {
       const newRestaurant = await tx.restaurant.create({
         data: {
-          latitude: createPlaceDto.latitude,
-          longitude: createPlaceDto.longitude,
-          type: createPlaceDto.type,
-          name: createPlaceDto.name,
-          location: createPlaceDto.location ?? null,
+          latitude: createPlaceDto.place.latitude,
+          longitude: createPlaceDto.place.longitude,
+          type: createPlaceDto.place.type,
+          name: createPlaceDto.place.name,
+          location: createPlaceDto.place.location ?? null,
         },
       });
       if (createPlaceDto.purpose === 0) {
