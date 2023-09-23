@@ -4,7 +4,7 @@ import { VersioningType, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
 
   app.enableVersioning({
     type: VersioningType.URI,
@@ -19,13 +19,13 @@ async function bootstrap() {
       },
     }),
   );
-
-  app.enableCors({
-    // domain 확정되었을 때 origin 수정 필요
-    origin: '*',
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  });
+  app.enableCors();
+  // app.enableCors({
+  //   // domain 확정되었을 때 origin 수정 필요
+  //   origin: '*',
+  //   credentials: true,
+  //   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  // });
 
   const appConfig = app.get(ConfigService);
 
