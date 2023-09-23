@@ -41,7 +41,7 @@ export class AuthService {
     if (!user) throw new BadRequestException(); //카카오 로그인 실패 예외처리
     let userId = await this.prisma.user.findFirst({
       where: {
-        id: stringify(user.data.id),
+        id: user.data.id.toString(),
       },
     });
     if (!userId)
