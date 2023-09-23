@@ -5,9 +5,10 @@ import { AppConfigModule } from './config/app/config.module';
 import { AuthModule } from './auth/auth.module';
 import { PlaceModule } from './place/place.module';
 import { UserModule } from './user/user.module';
+import { IdolModule } from './idol/idol.module';
 
 @Module({
-  imports: [AppConfigModule, AuthModule, PlaceModule, UserModule],
+  imports: [AppConfigModule, AuthModule, PlaceModule, UserModule, IdolModule],
   controllers: [AppController],
   providers: [AppService],
 })

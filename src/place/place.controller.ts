@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { User } from '@prisma/client';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { CurrentUser } from 'src/common/decorators/current-user.decorator';
@@ -24,5 +32,11 @@ export class PlaceController {
   async getPlace() {
     const places = await this.placeService.getPlace();
     return new CommonResponseDto(places);
+  }
+
+  @Get(':placeId')
+  async getVisitedIdols(@Param('placeId', ParseIntPipe) placeId: number) {
+    const idols = await this.placeService.getVisitedIdols(placeId);
+    return new CommonResponseDto(idols);
   }
 }

@@ -41,4 +41,23 @@ export class PlaceService {
   async getPlace() {
     return await this.prisma.restaurant.findMany();
   }
+
+  async getVisitedIdols(placeId: number) {
+    const idols = await this.prisma.restaurant_artist_mapping.findMany({
+      where: {
+        artistId: placeId,
+      },
+    });
+    const idolInfo = [];
+    idols.map(async (idol) => {
+      const info = await this.prisma.artist.findFirst({
+        where: {
+          id: idol.artistId,
+        },
+      });
+      idolInfo.push(info);
+    });
+
+    return idolInfo;
+  }
 }

@@ -50,6 +50,7 @@ model Restaurant {
   latitude                 Decimal
   location                 String?                      @db.VarChar(255)
   name                     String
+  imageUrl                 String?                      @db.VarChar(255)
   restaurantArtistMapping  restaurant_artist_mapping[]
   restaurantHashTagMapping restaurant_hashtag_mapping[]
 
