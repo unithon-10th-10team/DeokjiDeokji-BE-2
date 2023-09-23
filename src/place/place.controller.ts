@@ -39,4 +39,9 @@ export class PlaceController {
     const idols = await this.placeService.getVisitedIdols(placeId);
     return new CommonResponseDto(idols);
   }
+
+  @Get('/detail/:placeId')
+  async getDetailPlace(@Param('placeId', ParseIntPipe) placeId: number) {
+    return await this.placeService.getDetailPlace(placeId);
+  }
 }

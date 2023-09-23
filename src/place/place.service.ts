@@ -60,4 +60,12 @@ export class PlaceService {
 
     return idolInfo;
   }
+
+  async getDetailPlace(placeId: number) {
+    return await this.prisma.restaurant.findFirst({
+      where: {
+        id: placeId,
+      },
+    });
+  }
 }
