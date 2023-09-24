@@ -14,7 +14,7 @@ export class IdolService {
     if (!idol) {
       throw new BadRequestException('해당 아이돌이 존재하지않습니다');
     }
-    const places = await this.prisma.restaurant_artist_mapping.findMany({
+    return await this.prisma.restaurant_artist_mapping.findMany({
       where: {
         artistId: idol.id,
       },
@@ -46,7 +46,7 @@ export class IdolService {
     if (!group) {
       throw new BadRequestException('해당 그룹이 존재하지않습니다');
     }
-    const places = await this.prisma.restaurant_artist_mapping.findMany({
+    return await this.prisma.restaurant_artist_mapping.findMany({
       where: {
         artistId: group.id,
       },
@@ -58,12 +58,6 @@ export class IdolService {
           id: place.restaurantId,
         },
       });
-
-      //   for (let i = 0; i < placeInfo.length; i++) {
-      //     if (placeInfo[i].id === place.id) {
-      //       break;
-      //     }
-      //   }
       placeInfo.push(info);
     });
 
