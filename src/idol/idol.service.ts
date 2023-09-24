@@ -19,22 +19,22 @@ export class IdolService {
         artistId: idol.id,
       },
     });
-    const placeInfo = [];
-    places.map(async (place) => {
-      const info = await this.prisma.restaurant.findFirst({
-        where: {
-          id: place.restaurantId,
-        },
-      });
-      //   for (let i = 0; i < placeInfo.length; i++) {
-      //     if (placeInfo[i].id === place.id) {
-      //       break;
-      //     }
-      //   }
-      placeInfo.push(info);
-    });
+    // const placeInfo = [];
+    // places.map(async (place) => {
+    //   const info = await this.prisma.restaurant.findFirst({
+    //     where: {
+    //       id: place.restaurantId,
+    //     },
+    //   });
+    //   //   for (let i = 0; i < placeInfo.length; i++) {
+    //   //     if (placeInfo[i].id === place.id) {
+    //   //       break;
+    //   //     }
+    //   //   }
+    //   placeInfo.push(info);
+    // });
 
-    return placeInfo;
+    // return placeInfo;
   }
 
   async getGroupVisitedPlace(groupName: string) {
@@ -51,16 +51,16 @@ export class IdolService {
         artistId: group.id,
       },
     });
-    const placeInfo = [];
-    places.map(async (place) => {
-      const info = await this.prisma.restaurant.findFirst({
-        where: {
-          id: place.restaurantId,
-        },
-      });
-      placeInfo.push(info);
-    });
+    // const placeInfo = [];
+    // places.map(async (place) => {
+    //   const info = await this.prisma.restaurant.findFirst({
+    //     where: {
+    //       id: place.restaurantId,
+    //     },
+    //   });
+    //   placeInfo.push(info);
+    // });
 
-    return placeInfo;
+    // return placeInfo;
   }
 }
