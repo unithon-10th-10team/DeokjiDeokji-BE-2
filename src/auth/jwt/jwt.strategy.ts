@@ -4,6 +4,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { Payload } from './jwt.payload';
 import { User } from '@prisma/client';
+import { timeStamp } from 'console';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -16,7 +17,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: Payload) {
-    console.log('payload:', payload);
+    console.log('payload', timeStamp(), payload);
     const user: User = await this.prismaService.user.findUnique({
       where: {
         id: payload.userId.id,
