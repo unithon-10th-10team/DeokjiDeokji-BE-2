@@ -1,0 +1,14 @@
+*
+
+!src
+!prisma
+!package.json
+!package-lock.json
+!builder/entrypoint.sh
+!nest-cli.json
+!tsconfig.build.json
+!tsconfig.json
+
+dist
+.env
+.env.*

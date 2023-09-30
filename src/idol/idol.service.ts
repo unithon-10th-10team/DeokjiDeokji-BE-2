@@ -14,27 +14,27 @@ export class IdolService {
     if (!idol) {
       throw new BadRequestException('해당 아이돌이 존재하지않습니다');
     }
-    return await this.prisma.restaurant_artist_mapping.findMany({
+    const places = await this.prisma.restaurant_artist_mapping.findMany({
       where: {
         artistId: idol.id,
       },
     });
-    // const placeInfo = [];
-    // places.map(async (place) => {
-    //   const info = await this.prisma.restaurant.findFirst({
-    //     where: {
-    //       id: place.restaurantId,
-    //     },
-    //   });
-    //   //   for (let i = 0; i < placeInfo.length; i++) {
-    //   //     if (placeInfo[i].id === place.id) {
-    //   //       break;
-    //   //     }
-    //   //   }
-    //   placeInfo.push(info);
-    // });
+    const placeInfo = [];
+    places.map(async (place) => {
+      const info = await this.prisma.restaurant.findFirst({
+        where: {
+          id: place.restaurantId,
+        },
+      });
+      //   for (let i = 0; i < placeInfo.length; i++) {
+      //     if (placeInfo[i].id === place.id) {
+      //       break;
+      //     }
+      //   }
+      placeInfo.push(info);
+    });
 
-    // return placeInfo;
+    return placeInfo;
   }
 
   async getGroupVisitedPlace(groupName: string) {
@@ -46,21 +46,23 @@ export class IdolService {
     if (!group) {
       throw new BadRequestException('해당 그룹이 존재하지않습니다');
     }
-    return await this.prisma.restaurant_artist_mapping.findMany({
+    const places = await this.prisma.restaurant_artist_mapping.findMany({
       where: {
         artistId: group.id,
       },
     });
-    // const placeInfo = [];
-    // places.map(async (place) => {
-    //   const info = await this.prisma.restaurant.findFirst({
-    //     where: {
-    //       id: place.restaurantId,
-    //     },
-    //   });
-    //   placeInfo.push(info);
-    // });
+    const placeInfo = [];
+    if (places) {
+      places.map(async (place) => {
+        const info = await this.prisma.restaurant.findFirst({
+          where: {
+            id: place.restaurantId,
+          },
+        });
+        placeInfo.push(info);
+      });
+    }
 
-    // return placeInfo;
+    return placeInfo;
   }
 }
