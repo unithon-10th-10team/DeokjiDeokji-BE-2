@@ -23,7 +23,8 @@ async function bootstrap() {
   app.enableCors({
     // domain 확정되었을 때 origin 수정 필요
     // allowedHeaders: '*',
-    origin: 'http://localhost:3000',
+    // origin: 'http://localhost:3000',
+    origin: '*',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   });
