@@ -68,7 +68,7 @@ jobs:
         uses: imranismail/setup-kustomize@v2.0.0
       - name: Config Repo 이미지 값 업데이트 (Kustomize)
         run: |
-          cd config-repo/overlays/prod/
+          cd config-repo/overlays/dev/
           kustomize edit set image ${{ env.dockerimage_name }}:${{ env.dockerimage_tag }}
           cat kustomization.yaml
       - name: Config Repo 변경사항 푸시

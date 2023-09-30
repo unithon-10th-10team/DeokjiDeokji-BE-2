@@ -8,8 +8,6 @@ RUN npm install
 RUN npx prisma generate
 RUN npm run build
 
-EXPOSE 4000
-
 FROM node:18-alpine
 
 ENV NODE=ENV=production
