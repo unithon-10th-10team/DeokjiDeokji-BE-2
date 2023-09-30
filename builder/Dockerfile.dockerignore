@@ -8,5 +8,6 @@
 !nest-cli.json
 !tsconfig.build.json
 !tsconfig.json
+!.env
 
 dist
