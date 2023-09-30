@@ -10,5 +10,3 @@
 !tsconfig.json
 
 dist
-.env
-.env.*

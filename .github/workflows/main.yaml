@@ -40,9 +40,9 @@ jobs:
       - name: env 파일 생성
         run: |
             chmod +x ./builder/entrypoint.sh
-            echo DATABASE_URL=${{secrets.DATABASE}} >> .env
-            echo JWT_SECRET=${{secrets.JWT}} >> .env
-            cat .env
+            # echo DATABASE_URL=${{secrets.DATABASE}} >> .env
+            # echo JWT_SECRET=${{secrets.JWT}} >> .env
+            # cat .env
       - name: Docker 이미지 빌드+푸시
         id: build-and-push
         uses: docker/build-push-action@v4.0.0
