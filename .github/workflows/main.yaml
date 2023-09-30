@@ -59,7 +59,7 @@ jobs:
       - name: Config Repo 불러오기
         uses: actions/checkout@v3
         with:
-          repository: jcy0308/deokji-config
+          repository: jcy0308/config-repo
           ref: main
           token: ${{ secrets.ACTION_TOKEN }}
           path: config-repo
