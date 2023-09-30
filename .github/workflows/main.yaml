@@ -39,6 +39,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: env 파일 생성
         run: |
+            chmod +x ./builder/entrypoint.sh
             echo "DATABASE_URL=${{secrets.DATABASE}}" >> .env
             echo "JWT_SECRET=${{secrets.JWT}}" >> .env
       - name: Docker 이미지 빌드+푸시
