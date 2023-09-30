@@ -37,6 +37,8 @@ jobs:
         with:
           username: jcy0308
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: env 파일 생성
+        run: echo "DATABASE_URL=${{secrets.DATABASE}}" >> .env
       - name: Docker 이미지 빌드+푸시
         id: build-and-push
         uses: docker/build-push-action@v4.0.0
